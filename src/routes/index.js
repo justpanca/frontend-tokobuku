@@ -10,6 +10,7 @@ import Product from "@/views/Admin/Product.vue";
 import Profile from "@/views/Profile.vue";
 import DetailProduct from "@/views/DetailProduct.vue";
 
+
 const routes = [
   {
     path: "/",
@@ -80,5 +81,21 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+// ✅ Tambahkan Navigation Guard
+// router.beforeEach((to, from, next) => {
+//   const store = useStore(); // Ambil store untuk mendapatkan informasi user
+//   const user = store.getters["auth/user"]; // Pastikan Vuex memiliki getter untuk user
+
+//   if (to.meta.requiresAuth && !user) {
+//     // Jika route membutuhkan autentikasi dan user belum login, arahkan ke login
+//     next("/login");
+//   } else if (to.meta.requiresVerified && user?.email_verified_at) {
+//     // Jika user sudah verifikasi, tapi mencoba masuk ke verify-account, langsung ke home
+//     next("/");
+//   } else {
+//     next();
+//   }
+// });
 
 export default router;

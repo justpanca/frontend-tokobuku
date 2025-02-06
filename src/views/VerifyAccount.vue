@@ -20,7 +20,8 @@
             </label>
             <input
               type="text"
-              class="mt-1 w-full rounded-lg border-gray-300 p-3 text-black sm:text-sm bg-white"
+              class="mt-1 w-full rounded-lg border-gray-300 p-3
+               text-black sm:text-sm bg-white"
               placeholder="Contoh: 123456"
               v-model="otp_code"
             />
@@ -28,7 +29,8 @@
 
           <button
             type="submit"
-            class="w-full rounded-lg bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
+            class="w-full rounded-lg bg-blue-600 px-4 py-2
+             text-white transition hover:bg-blue-700"
           >
             Verifikasi
           </button>

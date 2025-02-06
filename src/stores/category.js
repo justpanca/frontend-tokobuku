@@ -30,5 +30,5 @@ export const useCategoryStore = defineStore("category", () => {
     }
   };
 
-  return { category,categoryId, getCategory, getCategoryDetail,  };
+  return { category,categoryId, getCategory, getCategoryDetail, };
 });

@@ -8,6 +8,7 @@
         placeholder="Masukan nama category"
         class="input input-bordered w-full mt-2"
         v-model="nameCategory"
+        required
       />
       <div class="flex gap-5">
         <button class="btn btn-primary btn-block mt-3">
@@ -83,7 +84,7 @@ const categoryData = ref([]);
 const isEdit = ref(false);
 const id = ref(null);
 
-// Functions
+// Fetch Data
 const fetchCategory = async () => {
   try {
     const { data } = await apiClient.get("/category");
@@ -94,6 +95,7 @@ const fetchCategory = async () => {
   }
 };
 
+// Form Handlers
 const tambahForm = () => {
   clearInputForm();
   inputAction.value = true;
@@ -110,6 +112,7 @@ const clearInputForm = () => {
   id.value = null;
 };
 
+// Edit & Delete
 const handleEdit = (item) => {
   inputAction.value = true;
   isEdit.value = true;
@@ -120,12 +123,10 @@ const handleEdit = (item) => {
 const handleDelete = async (itemId) => {
   if (!confirm("Are you sure you want to delete this category?")) return;
   try {
-    const response = await apiClient.post(`/category/${itemId}?_method=DELETE`, null,{
-      headers : {
-        Authorization:`Bearer ${store.token}`
-      }
+    await apiClient.delete(`/category/${itemId}`, {
+      headers: { Authorization: `Bearer ${store.token}` },
     });
-    alert(response.data.message || "Category deleted successfully.");
+    alert("Category deleted successfully.");
     await fetchCategory();
   } catch (error) {
     console.error("Error deleting category:", error);
@@ -133,47 +134,34 @@ const handleDelete = async (itemId) => {
   }
 };
 
+// Add & Update Category
 const actionCategory = async () => {
+  if (!nameCategory.value.trim()) {
+    alert("Category name cannot be empty.");
+    return;
+  }
+
   try {
-    let response;
-
     if (isEdit.value) {
-      // Update existing category
-      response = await apiClient.post(
-        `/category/${id.value}?_method=PUT`,
-        { name: nameCategory.value },
-        {
-          headers: { Authorization: `Bearer ${store.token}` },
-        }
-      );
-      alert(response.data.message || "Category updated successfully.");
+      await apiClient.put(`/category/${id.value}`, { name: nameCategory.value }, {
+        headers: { Authorization: `Bearer ${store.token}` },
+      });
+      alert("Category updated successfully.");
     } else {
-      // Create new category
-      response = await apiClient.post(
-        "/category",
-        { name: nameCategory.value },
-        {
-          headers: { Authorization: `Bearer ${store.token}` },
-        }
-      );
-      alert(response.data.message || "Category added successfully.");
+      await apiClient.post("/category", { name: nameCategory.value }, {
+        headers: { Authorization: `Bearer ${store.token}` },
+      });
+      alert("Category added successfully.");
     }
 
-    await fetchCategory(); // Refresh data setelah operasi berhasil
-    closeForm(); // Tutup form
+    await fetchCategory();
+    closeForm();
   } catch (error) {
-    if (error.response) {
-      console.error("Server responded with:", error.response);
-      alert(error.response.data.message || "An error occurred.");
-    } else {
-      console.error("Error:", error);
-      alert("Failed to save category. Please check your network or try again later.");
-    }
+    console.error("Error:", error);
+    alert(error.response?.data?.message || "An error occurred.");
   }
 };
-
 
 // Lifecycle Hook
 onMounted(fetchCategory);
 </script>
-  

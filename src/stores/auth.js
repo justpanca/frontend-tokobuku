@@ -48,11 +48,18 @@ export const authStore = defineStore("auth", () => {
       currentUser.value = data.user;
       localStorage.setItem("token", token.value);
       localStorage.setItem("user", JSON.stringify(currentUser.value));
-      router.replace("/verify-account");
+  
+      // Cek verifikasi
+      if (data.is_verified) {
+        router.replace("/"); // langsung ke home
+      } else {
+        router.replace("/verify-account"); // Jika belum, arahkan ke verifikasi
+      }
     } catch (error) {
       console.log(error.message);
     }
   }
+  
 
   async function logout() {
     try {
