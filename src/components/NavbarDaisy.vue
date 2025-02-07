@@ -4,9 +4,6 @@
       <RouterLink to="/" class="btn btn-ghost normal-case text-white text-3xl">
         TokoKita
       </RouterLink>
-      <RouterLink to="/product" class="btn btn-ghost normal-case text-white text-xl">
-        Product
-      </RouterLink>
     </div>
     <div class="flex-none">
       <div class="dropdown dropdown-end">

@@ -9,16 +9,16 @@
             GRAB upon 50% Off on
           </h1>
           <h1 class="text-xl md:text-5xl text-blue-600 font-bold">
-            Selected Toko Kita.
+            Selected Toko Buku.
           </h1>
         </div>
-        <div class="px-2 md:mx-0 mx-auto">
+        <!-- <div class="px-2 md:mx-0 mx-auto">
           <button
             class="block md:py-4 md:px-6 py-2 px-4 rounded-md bg-blue-600 text-white"
           >
             Buy Now
           </button>
-        </div>
+        </div> -->
       </div>
       <div class="w-1/2">
         <img

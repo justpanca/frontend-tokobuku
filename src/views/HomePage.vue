@@ -17,17 +17,14 @@
 
     <div class="py-4 px-10 mt-4">
       <div class="mb-6">
-        <input
-          type="text"
-          v-model="searchQuery"
-          class="w-full px-4 py-2 border rounded-md"
-          placeholder="Cari Product Disini..."
-        />
+        <!-- Gunakan Komponen SearchBar -->
+        <SearchBar v-model="searchQuery" />
       </div>
 
-      <h1 class="text-4xl font-bold text-black mb-4 font-sans bg-gradient-to-r bg-gray-600 to-white bg-clip-text text-transparent">Recommended for you</h1>
+      <h1 class="text-4xl font-bold text-black mb-4 font-sans bg-gradient-to-r bg-gray-600 to-white bg-clip-text text-transparent">
+        Recommended for you
+      </h1>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Tampilkan hasil pencarian -->
         <CardProduct :dataProps="filteredProducts" />
       </div>
     </div>
@@ -41,46 +38,30 @@ import { useProductsStore } from "@/stores/product";
 import DefaultLayout from "@/layouts/Default.vue";
 import Hero from "@/components/Hero.vue";
 import CardProduct from "@/components/CardProduct.vue";
+import SearchBar from "@/components/SearchBar.vue";
 
 const category = useCategoryStore();
 const product = useProductsStore();
 const isLoading = ref(true);
 const searchQuery = ref("");
 
-const handleGetCategory = async () => {
+// Panggil API dengan Promise.all
+const fetchData = async () => {
   try {
-    const res = await category.getCategory();
-    console.log(res);
+    await Promise.all([category.getCategory(), product.getProduct()]);
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching data:", error);
   } finally {
     isLoading.value = false;
   }
 };
 
-const handleGetProduct = async () => {
-  try {
-    const res = await product.getProduct();
-    console.log(res);
-  } catch (error) {
-    console.log(error);
-  } finally {
-    isLoading.value = false;
-  }
-};
-
+// Filter produk
 const filteredProducts = computed(() => {
-  if (!searchQuery.value) {
-    return product.products;
-  }
   return product.products.filter((p) =>
     p.name.toLowerCase().includes(searchQuery.value.toLowerCase())
   );
 });
 
-onMounted(() => {
-  handleGetCategory();
-  handleGetProduct();
-});
+onMounted(fetchData);
 </script>
-
