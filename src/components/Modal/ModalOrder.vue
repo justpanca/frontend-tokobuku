@@ -39,7 +39,7 @@
           </label>
           <input
             type="text"
-            placeholder="first name"
+            placeholder="last name"
             class="input input-bordered"
             v-model="data.last_name"
           />
@@ -50,7 +50,7 @@
           </label>
           <input
             type="text"
-            placeholder="first name"
+            placeholder="address"
             class="input input-bordered"
             v-model="data.address"
           />
