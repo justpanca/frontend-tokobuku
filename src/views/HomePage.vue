@@ -2,32 +2,39 @@
   <DefaultLayout>
     <Hero />
 
-    <div class="px-10">
-      <div class="flex flex-wrap gap-2 py-4">
-        <RouterLink
-          class="px-10 py-2 text-black border border-black font-italic rounded-md"
-          v-for="item in category.category"
-          :key="item.id"
-          :to="`/category/${item.id}`"
-        >
-          {{ item.name }}
-        </RouterLink>
-      </div>
-    </div>
+<div class="py-4 px-10 mt-4">
+  <!-- Search Bar -->
+  <div class="mb-6">
+    <SearchBar v-model="searchQuery" />
+  </div>
 
-    <div class="py-4 px-10 mt-4">
-      <div class="mb-6">
-        <!-- Gunakan Komponen SearchBar -->
-        <SearchBar v-model="searchQuery" />
-      </div>
+  <!-- Category List -->
+  <div class="flex flex-wrap gap-2 py-4">
+    <RouterLink
+      v-for="item in category.category"
+      :key="item.id"
+      :to="`/category/${item.id}`"
+      class="px-10 py-2 text-black border border-black font-italic rounded-md"
+    >
+      {{ item.name }}
+    </RouterLink>
+  </div>
 
-      <h1 class="text-4xl font-bold text-black mb-4 font-sans bg-gradient-to-r bg-gray-600 to-white bg-clip-text text-transparent">
-        Recommended for you
-      </h1>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <CardProduct :dataProps="filteredProducts" />
-      </div>
-    </div>
+  <!-- Recommended Section -->
+  <h1 
+    class="text-4xl font-bold text-black mb-4 font-sans 
+           bg-gradient-to-r from-gray-600 to-white 
+           bg-clip-text text-transparent"
+  >
+    Recommended for you
+  </h1>
+
+  <!-- Product Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <CardProduct :dataProps="filteredProducts" />
+  </div>
+</div>
+
   </DefaultLayout>
 </template>
 

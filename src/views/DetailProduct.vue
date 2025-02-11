@@ -67,19 +67,24 @@ const handleSubmit = async (data) => {
     window.snap.pay(snapToken, {
       onSuccess: function (result) {
         console.log("success", result);
+        alert("Pembayaran berhasil! Terima kasih.");
       },
       onPending: function (result) {
         console.log("pending", result);
+        alert("Pembayaran dalam proses. Silakan cek statusnya nanti.");
       },
       onError: function (result) {
         console.log("error", result);
+        alert("Terjadi kesalahan saat memproses pembayaran.");
       },
       onClose: function () {
-        console.log("customer closed the popup without finishing the payment");
+        // console.log("customer closed the popup without finishing the payment");
+        alert("Anda menutup pembayaran sebelum selesai.");
       },
     });
   } catch (error) {
     console.log(error);
+    alert("Terjadi kesalahan saat menginisialisasi pembayaran.");
   }
 };
 
