@@ -9,22 +9,26 @@
 
     <label class="form-control w-full">
       <span class="label-text">Name</span>
-      <input type="text" class="input input-bordered w-full" v-model="data.name" placeholder="Enter name" />
+      <input type="text" class="input input-bordered w-full" 
+      v-model="data.name" placeholder="Enter name" />
     </label>
 
     <label class="form-control w-full">
       <span class="label-text">Description</span>
-      <input type="text" class="input input-bordered w-full" v-model="data.description" placeholder="Enter description" />
+      <input type="text" class="input input-bordered w-full" 
+      v-model="data.description" placeholder="Enter description" />
     </label>
 
     <label class="form-control w-full">
       <span class="label-text">Price</span>
-      <input type="number" class="input input-bordered w-full" v-model="data.price" placeholder="Enter price" />
+      <input type="number" class="input input-bordered w-full" 
+      v-model="data.price" placeholder="Enter price" />
     </label>
 
     <label class="form-control w-full">
       <span class="label-text">Stock</span>
-      <input type="number" class="input input-bordered w-full" v-model="data.stock" placeholder="Enter stock" />
+      <input type="number" class="input input-bordered w-full" 
+      v-model="data.stock" placeholder="Enter stock" />
     </label>
 
     <label class="form-control w-full">
@@ -39,7 +43,8 @@
       <button class="btn btn-primary flex-1" type="submit">
         {{ isEdit ? "Update" : "Add" }}
       </button>
-      <button v-if="isEdit" type="button" class="btn btn-danger flex-1" @click="handleDelete">Delete</button>
+      <button v-if="isEdit" type="button" class="btn btn-danger flex-1"
+       @click="handleDelete">Delete</button>
     </div>
   </form>
 </template>

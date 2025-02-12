@@ -62,7 +62,7 @@
           class="select select-bordered select-xs bg-white text-black w-full max-w-xs"
           v-model="data.quantity"
         >
-          <option v-for="stock in dataProps.stock" :key="stock">
+          <option v-for="stock in dataProps.stock" :key="stock" :value="stock">
             {{ stock }}
           </option>
         </select>
@@ -106,8 +106,8 @@ const order = () => {
     last_name: data.last_name,
     address: data.address,
     quantity: data.quantity,
-    total_price: props.dataProps.price * data.quantity,
+    total_price: props.dataProps.price,
   });
   console.log("-->", data.quantity);
 };
-</script>
+</script> 
