@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   
     <div class="container mx-auto px-4 py-6 ">
     <h2 class="text-2xl font-bold mb-2">{{ category.name }}</h2>
@@ -28,6 +28,32 @@
 
   
   
+</template> -->
+
+<template>
+  <div class="container mx-auto px-4 py-6">
+    <h2 class="text-2xl font-bold mb-2">{{ category.name }}</h2>
+    <p class="text-gray-700 mb-6">{{ category.description }}</p>
+    <h3 class="text-xl font-semibold mb-4">Produk dalam Kategori:</h3>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div 
+        v-for="product in category.product" 
+        :key="product.id" 
+        class="bg-white p-4 shadow-lg rounded-md flex flex-col items-center text-center overflow-hidden"
+      >
+        <img 
+          :src="product.image" 
+          :alt="product.name" 
+          class="w-40 h-40 object-cover rounded-md shadow-md" 
+        />
+        <h4 class="text-lg font-semibold mt-2">{{ product.name }}</h4>
+        <p class="text-gray-600 text-sm line-clamp-2 h-12 max-h-20 overflow-hidden">
+          {{ product.description }}
+        </p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
