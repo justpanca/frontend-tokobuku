@@ -196,7 +196,7 @@ const order = () => {
     last_name: data.last_name,
     address: data.address,
     quantity: data.quantity,
-    total_price: data.quantity * price, // Perhitungan sudah benar
+    total_price: props.dataProps.price,
   });
 
   console.log("Harga per item:", price);
