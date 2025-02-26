@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="navbar bg-blue-500 px-6">
     <div class="flex-1 gap-3">
       <RouterLink to="/" class="btn btn-ghost normal-case text-white text-3xl">
@@ -85,4 +85,72 @@ const user = auth.currentUser;
 const onLogout = async () => {
   await auth.logout();
 };
+</script> -->
+
+<template>
+  <div class="navbar bg-blue-500 px-6">
+    <div class="flex-1 gap-3">
+      <RouterLink to="/" class="btn btn-ghost normal-case text-white text-3xl">
+        TokoBuku
+      </RouterLink>
+    </div>
+
+    <div class="flex-none">
+      <!-- Dropdown Profil -->
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+          <div class="w-10 rounded-full">
+            <img
+              v-if="user?.profile?.image"
+              alt="Profile Picture"
+              :src="user.profile.image"
+            />
+            <img
+              v-else
+              alt="Default Avatar"
+              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+            />
+          </div>
+        </div>
+
+        <ul
+          tabindex="0"
+          class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+        >
+          <!-- menampilkan data profile-->
+          <li v-if="user">
+            <RouterLink to="/profile" class="justify-between">
+              My Profile
+              <span class="badge">{{ user?.name || "User" }}</span>
+            </RouterLink>
+          </li>
+
+          <!-- edit profile -->
+          <li v-if="user">
+            <RouterLink to="/profile/edit" class="justify-between">
+              Edit Profile 
+            </RouterLink>
+          </li>
+
+          <li>
+            <button v-if="user" @click="onLogout">Logout</button>
+            <RouterLink v-else to="/login">Login</RouterLink>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { authStore } from "@/stores/auth";
+import { computed } from "vue";
+
+const auth = authStore();
+const user = computed(() => auth.currentUser); 
+
+const onLogout = async () => {
+  await auth.logout();
+};
 </script>
+
