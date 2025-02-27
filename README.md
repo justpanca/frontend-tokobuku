@@ -27,3 +27,17 @@ npm run dev
 ```sh
 npm run build
 ```
+
+### login as admin
+
+```sh
+email : admin@gmail.com
+password : password
+```
+
+### login as user
+
+```sh
+email : panca12@gmail.com
+password : password
+```
